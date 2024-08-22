@@ -16,4 +16,14 @@ class UserController extends Controller
     public function loadAddUserForm(){
         return view('add-user');
     }
+
+    public function AddUser(Request $request){
+        // perform form validation here
+        $request->validate([
+            'full_name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'phone_number' => 'required|integer',
+            'password' => 'required|confirmed|min:4|max:8',
+        ]);
+    }
 }
